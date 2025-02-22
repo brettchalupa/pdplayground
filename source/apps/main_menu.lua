@@ -4,9 +4,17 @@ apps.mainMenu = {
 	name = "Main Menu",
 }
 
-local currentAppIndex = 1
+local selectedAppIndex = 1
 local mainMenu <const> = apps.mainMenu
 local menuApps = {}
+local listview = playdate.ui.gridview.new(0, 24)
+
+local function initListview()
+	listview.backgroundImage = playdate.graphics.nineSlice.new("sprites/shadowbox", 4, 4, 45, 45)
+	listview:setNumberOfRows(#menuApps)
+	listview:setCellPadding(0, 0, 8, 6)
+	listview:setContentInset(24, 24, 0, 10)
+end
 
 function apps.mainMenu.init()
 	if #menuApps == 0 then
@@ -20,50 +28,49 @@ function apps.mainMenu.init()
 	table.sort(menuApps, function(a, b)
 		return a.name < b.name
 	end)
+
+	initListview()
 end
 
 function apps.mainMenu.update()
 	if playdate.buttonJustPressed(playdate.kButtonA) then
 		sfx.play(sfx.select)
-		apps.switchTo(menuApps[currentAppIndex])
+		apps.switchTo(menuApps[selectedAppIndex])
 		return
 	end
 
 	if playdate.buttonJustPressed(playdate.kButtonUp) then
 		sfx.play(sfx.up)
 
-		currentAppIndex -= 1
-		if currentAppIndex < 1 then
-			currentAppIndex = #menuApps
-		end
+		listview:selectPreviousRow(true)
 	end
 
 	if playdate.buttonJustPressed(playdate.kButtonDown) then
 		sfx.play(sfx.down)
 
-		currentAppIndex += 1
-		if currentAppIndex > #menuApps then
-			currentAppIndex = 1
-		end
+		listview:selectNextRow(true)
 	end
 
-	-- todo: refactor to only draw this when it changes
+	selectedAppIndex = listview:getSelectedRow()
+
 	gfx.clear()
 	gfx.setFont(fonts.medium)
 	gfx.drawText("Playdate Playground", 12, 12)
 
 	gfx.setFont(fonts.small)
-	-- gfx.drawText(meta.versionAndBuild, 12, screen.height - 44);
-	gfx.drawText("by " .. meta.author, screen.width - 164, screen.height - 44);
-	mainMenu.drawApps()
+	gfx.drawText(meta.versionAndBuild, 12, screen.height - 28);
+	gfx.drawText("by " .. meta.author, screen.width - 164, screen.height - 28);
+
+	 --gfx.drawRect(40, 48, 340, 140)
+	listview:drawInRect(80, 48, 240, 156)
 end
 
-function mainMenu.drawApps()
-	for i, v in pairs(menuApps) do
-		gfx.drawText(v.name, 24, i * 24 + 42)
-
-		if currentAppIndex == i then
-			gfx.fillRect(math.sin(playdate.getCurrentTimeMilliseconds() / 140) + 8, i * 24 + 42 + 6, 8, 8, 0)
-		end
+function listview:drawCell(section, row, column, selected, x, y, width, height)
+	if selected then
+		gfx.fillRoundRect(x, y, width, 30, 4)
+		gfx.setImageDrawMode(gfx.kDrawModeFillWhite)
+	else
+		gfx.setImageDrawMode(gfx.kDrawModeCopy)
 	end
+	gfx.drawTextInRect("" .. menuApps[row].name, x, y + 6, width, height, 1, "...", kTextAlignment.center, fonts.small)
 end

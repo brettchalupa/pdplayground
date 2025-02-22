@@ -1,5 +1,8 @@
-import "CoreLibs/object"
 import "CoreLibs/graphics"
+import "CoreLibs/object"
+import "CoreLibs/timer"
+import "CoreLibs/ui"
+import 'CoreLibs/nineslice'
 
 import "util"
 import "meta"
@@ -23,6 +26,8 @@ menu:addMenuItem("main menu", function()
 end)
 
 function playdate.update()
+	playdate.timer:updateTimers()
+
 	apps.current.update()
 
 	if meta.isDebug then
