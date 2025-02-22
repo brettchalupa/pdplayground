@@ -72,5 +72,5 @@ function listview:drawCell(section, row, column, selected, x, y, width, height)
 	else
 		gfx.setImageDrawMode(gfx.kDrawModeCopy)
 	end
-	gfx.drawTextInRect("" .. menuApps[row].name, x, y + 6, width, height, 1, "...", kTextAlignment.center, fonts.small)
+	gfx.drawText(menuApps[row].name, x, y + 6, width, height, nil, gfx.kWrapClip, gfx.kAlignCenter)
 end
