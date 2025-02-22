@@ -1,7 +1,7 @@
 sfx = {}
 
 function sfx.play(note)
-	sfx.synth:playNote(note, 0.5, 0.1)
+	sfx.synth:playNote(note, 0.3, 0.1)
 end
 
 sfx.back = "B4"
