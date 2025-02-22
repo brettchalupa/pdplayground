@@ -2,6 +2,7 @@ apps = {}
 
 import "apps/accel"
 import "apps/debug"
+import "apps/display"
 import "apps/input"
 import "apps/main_menu"
 import "apps/meta"
