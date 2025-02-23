@@ -61,7 +61,6 @@ function apps.mainMenu.update()
 	gfx.drawText(meta.versionAndBuild, 12, screen.height - 28);
 	gfx.drawText("by " .. meta.author, screen.width - 164, screen.height - 28);
 
-	 --gfx.drawRect(40, 48, 340, 140)
 	listview:drawInRect(80, 48, 240, 156)
 end
 
@@ -72,5 +71,6 @@ function listview:drawCell(section, row, column, selected, x, y, width, height)
 	else
 		gfx.setImageDrawMode(gfx.kDrawModeCopy)
 	end
+
 	gfx.drawText(menuApps[row].name, x, y + 6, width, height, nil, gfx.kWrapClip, gfx.kAlignCenter)
 end
