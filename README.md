@@ -1,4 +1,4 @@
-# Playdate Playground
+# PDPlayground
 
 Exercising every functionality within the Playdate SDK with Lua to learn it and share examples.
 
