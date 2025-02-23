@@ -5,7 +5,7 @@ local gfx <const> = playdate.graphics
 apps.uuid = {
 	name = "UUID",
 	key = "uuid",
-	description = "Information about the console",
+	description = "Generate a unique ID",
 }
 
 local uuid = apps.uuid
