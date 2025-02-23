@@ -9,6 +9,7 @@ import "apps/main_menu"
 import "apps/meta"
 import "apps/sysinfo"
 import "apps/time"
+import "apps/uuid"
 
 function apps.init()
 	apps.switchTo(apps.mainMenu)
