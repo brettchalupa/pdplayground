@@ -1,6 +1,11 @@
 # PDPlayground
 
-Exercising every functionality within the Playdate SDK with Lua to learn it and share examples.
+Project aiming to exercise every functionality within the Playdate SDK in Lua
+to learn it and share examples.
+
+Currently a work in progress.
+
+See `source/apps/` for the currently built apps.
 
 ## Development
 
